@@ -3,13 +3,14 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.InMemory
 {   //Bellekte ürün ile ilgili veri erişim kodlarının yazılacağı yer anlmaına gelmektedir.
-    public class InMemoryProductDal : IProductDal
-    {   
+    public class InMemoryProductDal :IProductDal
+    {
         List<Product> _products;
 
         public InMemoryProductDal()
@@ -26,9 +27,9 @@ namespace DataAccess.Concrete.InMemory
 
             };
             //Burada constructor sayesinde 'InMemoryProductDal' her seferinde çalıştıtıldığı zaman constructor tetiklenecktir.
-           
+
         }
-        
+
         public void Add(Product product)
         {
             _products.Add(product);//Veri tabanı olarak kabul ettiğimiz bellek işlemlerimize ekleme işlemlerini bu şekilde gerçekleştiryoruz.
@@ -37,11 +38,16 @@ namespace DataAccess.Concrete.InMemory
         public void Delete(Product product)
         {
             Product productToDelete = null;
-            
-            productToDelete = _products.SingleOrDefault(p=>p.ProductId==product.ProductId);//LINQ
+
+            productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);//LINQ
             //Gönderilen p için,p'nin productıd'si (Foreach gibi düşünecek olursak) metoda gönderilen product'ın,productıd'si ile eşit ise SingleOrDefault metodu ile bu nesnenin referansını tutarak
             //productToDelete geçici değişkenine,nesnemizin referans adresimizin atamasını yapıyoruz.Ve bu değişkeni Remove() komutu ile silme işlemini gerçekleştiriyoruz.
             _products.Remove(productToDelete);//Silme işlemi burada gerçekleşecektir.
+        }
+
+        public Product Get(Expression<Func<Product, bool>> Filter)//Filtreli getirme işlemi gerçekleştirilebilir.
+        {
+            throw new NotImplementedException();
         }
 
         public List<Product> GetAll()
@@ -50,19 +56,24 @@ namespace DataAccess.Concrete.InMemory
             return _products;//verileri kaydettiğimiz bölgeyi olduğu gibi döndürüyoruz.
         }
 
+        public List<Product> GetAll(Expression<Func<Product, bool>> Filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GettAllByCatefory(int categoryId)
         {
-            
+
             return _products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
         public void Update(Product product)
         {
             //Gönderdiğimiz ÜrünID'sine sahip olan ürünü bul anlamına gelmektedir.
-            
+
             Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
-            productToUpdate.ProductName=product.ProductName;
-            productToUpdate.ProductId=product.ProductId;
+            productToUpdate.ProductName = product.ProductName;
+            productToUpdate.ProductId = product.ProductId;
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
             productToUpdate.CategoryId = product.CategoryId;

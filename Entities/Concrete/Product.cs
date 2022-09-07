@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Astract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Entities.Concrete
 {
     //Diğer katmanlarda buraya erişsinler diye kullanmaktayız
     //İnternal ifadesi projenin içerisideki bütün dosyalara erişim sağlanmaktadır.
-    public class Product
+    public class Product:IEntity
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
