@@ -7,12 +7,48 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="UmbracoCms.Core" Version="8.18.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlcese40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlceqp40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlceme40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlceer40EN.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlcecompact40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\sqlceca40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\Microsoft.VC90.CRT\msvcr90.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\fayik\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
 
 </Project>
