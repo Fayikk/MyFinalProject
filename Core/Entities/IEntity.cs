@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Astract
+namespace Core.Entities
 {   //IEntity implement eden class bir veritabanı tablosudur.
     public interface IEntity
     {
-
+            
     }
 }

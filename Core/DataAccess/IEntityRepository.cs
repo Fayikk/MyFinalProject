@@ -1,17 +1,23 @@
-﻿using System;
+﻿using Core.Entities;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 
 //Entity framework;geliştiriciyi karmaşık sql sorgularından kurtaran bir nevi ORM(Object Relational Mapping) anlamına gelen bir yöntemdir.
 
-namespace Business.Abstract
+namespace Core.DataAccess
 {   //Repository'mizi oluşturduk.(Depomuzdaki verileimiz bunlardır.İşlemlerimizi bu ifadeler üzerinde gerçekleştirebiliriz)
-    public interface IEntityRepository<T> //"T" ile çalışılacak tipin belirlenmesi gerekmektedir.Ancak tip bağımlılığından kurtarılmaktadır.
-    {
+    //Generic Constraint(Generiz kısıt anlamına gelmektedir)
+    //Koşul ifadesindeki class=referans tip anlamına gelmektedir.
+    public interface IEntityRepository<T> where T:class,IEntity,new() //"T" ile çalışılacak tipin belirlenmesi gerekmektedir.Ancak tip bağımlılığından kurtarılmaktadır.
+    {   //Where koşul ifadesinden hemen sonra gelen ifademiz için kullanılan yapılar şu anlama gelmektedir.
+        //IEntityRepository<T> hem class ibaresi sayesinde referans tip olmalı,aynı zamanda bir IEntity olmalıdır.Yani IEntity interface'ini bir şekilde kullanıyor olmalıdır.
+        //Ve new() ile newlenebilir olması gerekmektedir.Dolayısıya IEntity interface olduğu için IEntity kabul edilmeyecektir.
         //GetAll() metodu "Hepsini getir" anlamına gelmektedir.
         //Buradaki Product farklı bir katmandan gelecektir.
         //Unutmayın! 2 katman birbirini referans edemez.
