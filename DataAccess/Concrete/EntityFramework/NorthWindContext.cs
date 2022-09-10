@@ -28,8 +28,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }//Varlıklarımız içerisinde(Entities) bir adet Customer bulunmaktadır.Bunuda Bağlamış olduğumuz veritabanındaki Customers'a bağla diyoruz.
 
         public DbSet<Category> Categories { get; set; }//Ve son olarak Entities Projesi içerisinde bir adette Category class'ı bulunmaktadır.Bunuda verittabanından categories'e bağlıyoruz.Aslında belirtim yapıyoruz.
-           
+
         //Artık bu sayede veritabanı işlemleriyle alakalı kodlarımızı Product,Customer,Category için yazabiliriz.
-    
+        public DbSet<Order> Orders { get; set; }//Benim 1 tane order nesnem var ve bunu orders ile ilişkilendirirmisin.
     }
 }

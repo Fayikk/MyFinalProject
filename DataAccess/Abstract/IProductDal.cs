@@ -11,7 +11,12 @@ using Umbraco.Core.Persistence.Repositories;
 namespace DataAccess.Abstract
 {   //İsmindeki dal onun hhangi katmana karşılık geldiğini anlatmaktadır.
     public interface IProductDal:IEntityRepository<Product>//Burada sen IEntityRepository'yi product için yapılandırdın anlamına gelmektedir.
-    {  
+    {
+        //Buraya sadece ürüne ait özel operasyonları koyacağız.
+        //Yani şu şekilde gerçekleşmektedir.Gerekli olan yordamların,metodların interfaceler yardımıyla implementasyonları gerçekleştirilir.Ancak bununla beraber 
+        //Class'ın kendine has,özgü metodları bulunabilir bu metodların kullanımı için bul class gayet uygundur.
+
+
 
     }
 }
