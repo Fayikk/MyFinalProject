@@ -10,6 +10,7 @@ namespace Entities.Concrete
     //Bu class bizim için bir veritabanı nesnesidir.Dolayısıyla IEntity interface'ini kalıtım yolu ile almak zorundadır.
     public class Order:IEntity
     {
+        //Siparişin adı
         public int OrderId { get; set; }
         public string CustomerId { get; set; }
 

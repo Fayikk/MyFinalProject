@@ -12,6 +12,6 @@ namespace DataAccess.Abstract
     //Unutmayın public diğer katmanlardan erişimi sağlayacaktır.
     public interface ICategoryDal:IEntityRepository<Category>
     {
-        
+        //Category'e ait özel operasyonları buraya koyacağız
     }
 }

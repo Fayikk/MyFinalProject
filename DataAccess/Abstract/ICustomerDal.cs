@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
 {
     public interface ICustomerDal:IEntityRepository<Customer>
     {
-        //Class kendine özel metodları burada gerçekleştirecektir.
+        //Customer'a ait özel metodları burada gerçekleştirecektir.
 
     }
 }

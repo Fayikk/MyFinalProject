@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IOrderDal:IEntityRepository<Order>
     {
-
+        //Order'a ait özel metodları buraya koyacağız.
     }
 }
