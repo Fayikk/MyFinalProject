@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
-{
+{   //Trying
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
