@@ -11,15 +11,18 @@ namespace Business.Abstract
 {//Data Acces ve Entities referans olarak alacaktır.
     public interface IProductService
     {
-        List<Product> GetAll();
-        List<Product> GetAllByCategoryId(int id);
+        IDataResult<List<Product>> GetAll();//Burada yapılmak istenen mesaj ile birlikte veri döndürme işlemide gerçekleşsin diyorsak
+        //IDataResult yapısı şeklindeki yapılar kullanılacaktır.
+        IDataResult<List<Product>> GetAllByCategoryId(int id);
         
-        List<Product> GetByUnitPrice(decimal min,decimal max);
+        IDataResult<List<Product>> GetByUnitPrice(decimal min,decimal max);
 
-        List<ProductDetailDto> GetProductDetails();
+        IDataResult<List<ProductDetailDto>> GetProductDetails();
         
 
-        Product GetBtId(int productId);
+        IDataResult<Product> GetBtId(int productId);
+        //Dataya sahip olanların hepsi IDataResult olarak tanımlandı.
+
         IResult Add(Product product);
 
     }

@@ -14,21 +14,29 @@ namespace MyApp // Note: actual namespace depends on the project name.
             //CustomerTest();
             ////Data Transformation Object (DTO) anlamına gelmektedir.(Veri dönüşüm nesnesi) 
             ProductManager productManager = new ProductManager(new EfProductDal());
-
-            foreach (var product in productManager.GetProductDetails())
+            var result = productManager.GetProductDetails();
+            if (result.Success)
             {
-                Console.WriteLine(product.ProductName + " - " + product.CategoryName);
+                foreach (var product in productManager.GetProductDetails().Data)
+                {
+                    Console.WriteLine(product.ProductName + " - " + product.CategoryName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
-        private static void CustomerTest()
-        {
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            foreach (var customer in customerManager.GetById("Wolza"))
-            {
-                Console.WriteLine(customer.CustomerId + " - " + customer.ContactName);
-            }
-        }
+        //private static void CustomerTest()
+        //{
+        //    CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+        //    foreach (var customer in customerManager.GetById("Wolza"))
+        //    {
+        //        Console.WriteLine(customer.CustomerId + " - " + customer.ContactName);
+        //    }
+        //}
 
         private static void CategoryTest()
         {

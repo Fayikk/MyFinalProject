@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -26,11 +27,13 @@ namespace Business.Concrete
 
             if (product.ProductName.Length<2)
             {
-                return new ErrorResult("Ürün ismi en az 2 karakter olmalıdır");
+                //Magic strings
+                return new ErrorResult(Messages.ProductNameInvalid);//Görüldüğü üzere değişmezlerimizi tuttuğumuz class içerisinde 
+                //Magic strings karmaşıklığına sebebiyet vermeden static metodlarımız yardımı ile işimizi çözümlemiş olduk.
             }
        
             _productDal.Add(product);
-            return new SuccessResult();//Burada mesaj döndürebilir yada boolean değer döndürmesi yapabilmektedir.
+            return new SuccessResult(Messages.ProductAdded);//Burada mesaj döndürebilir yada boolean değer döndürmesi yapabilmektedir.
             //2 Parametreli ifadede hem mesaj değeri döndürürken aynı zamanda bool ifade değer döndürmektedir.
             //1 Parametreli ifadede ise sadece bool değer döndürmesi gerçekleştirilecektir.
             //yukarıdaki gibi bir değer döndürme işlemini gerçekleştirebilmemiz için
@@ -39,37 +42,47 @@ namespace Business.Concrete
             //ve yukarıdaki ifadeyi kullanabilmemizin yolu'da sııf için constructor'lardan geçmektedir.
         }
 
-        public List<Product> GetAll()
+        public IDataResult<List<Product>> GetAll()
         {
             //Varsa iş kodlarımızı buraya yazıyoruz.
             //Bir iş sınıfı başka sınıfları new'lemez
             //Yetkisi varmı?
-            return _productDal.GetAll();
+            if (DateTime.Now.Hour==20)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.MaintanceTime);//Data döndürmüyorum
+            }
+
+
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.Success);
 
         }
 
-        public List<Product> GetAllByCategoryId(int id)
+        public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
-            return _productDal.GetAll(p=>p.CategoryId == id);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
             //Burada ise filtreleme işlemlerimizi gerçekleştirmmiş oluyoruz.
             //Filtremizi verirken diyoruzki olurda p için categoryId'miz,eğer ıd'ye eşit oluyorsa.
             //bunu döndürelim.
         }
 
-        public Product GetBtId(int productId)
+        public IDataResult<Product> GetBtId(int productId)
         {
-            return _productDal.Get(p => p.ProductId == productId);//Delegasyon yöntemi
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId),Messages.ListId);//Delegasyon yöntemi
         }
 
-        public List<Product> GetByUnitPrice(decimal min, decimal max)
+        public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
         {
             //Burada 2 fiyat aralığında olan data'yı bize getirme işlemini  gerçekleştirecektir.
-            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
+            return new DataResultt<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max),false,"Error");
         }
 
-        public List<ProductDetailDto> GetProductDetails()
+        public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            return _productDal.GetProductDetails();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintanceTime);//Data döndürmüyorum
+            }
+            return new DataResultt<List<ProductDetailDto>>(_productDal.GetProductDetails(),true,"Success");
         }
     }
 }
