@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -20,6 +21,24 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        public IResult Add(Product product)
+        {
+
+            if (product.ProductName.Length<2)
+            {
+                return new ErrorResult("Ürün ismi en az 2 karakter olmalıdır");
+            }
+       
+            _productDal.Add(product);
+            return new SuccessResult();//Burada mesaj döndürebilir yada boolean değer döndürmesi yapabilmektedir.
+            //2 Parametreli ifadede hem mesaj değeri döndürürken aynı zamanda bool ifade değer döndürmektedir.
+            //1 Parametreli ifadede ise sadece bool değer döndürmesi gerçekleştirilecektir.
+            //yukarıdaki gibi bir değer döndürme işlemini gerçekleştirebilmemiz için
+            //metodumuzun değer döndürdüğü sınıf'ın bir yapıcı metoda ihtiyacı vardır.
+            //Yapıcı metodlar tetiklenme işlemlerini gerçekleştirirler.Dolayısıyla
+            //ve yukarıdaki ifadeyi kullanabilmemizin yolu'da sııf için constructor'lardan geçmektedir.
+        }
+
         public List<Product> GetAll()
         {
             //Varsa iş kodlarımızı buraya yazıyoruz.
@@ -35,6 +54,11 @@ namespace Business.Concrete
             //Burada ise filtreleme işlemlerimizi gerçekleştirmmiş oluyoruz.
             //Filtremizi verirken diyoruzki olurda p için categoryId'miz,eğer ıd'ye eşit oluyorsa.
             //bunu döndürelim.
+        }
+
+        public Product GetBtId(int productId)
+        {
+            return _productDal.Get(p => p.ProductId == productId);//Delegasyon yöntemi
         }
 
         public List<Product> GetByUnitPrice(decimal min, decimal max)
