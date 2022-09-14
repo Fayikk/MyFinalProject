@@ -25,12 +25,12 @@ namespace Business.Concrete
         public IResult Add(Product product)
         {
 
-            if (product.ProductName.Length<2)
-            {
-                //Magic strings
-                return new ErrorResult(Messages.ProductNameInvalid);//Görüldüğü üzere değişmezlerimizi tuttuğumuz class içerisinde 
-                //Magic strings karmaşıklığına sebebiyet vermeden static metodlarımız yardımı ile işimizi çözümlemiş olduk.
-            }
+            //if (product.ProductName.Length<2)
+            //{
+            //    //Magic strings
+            //    return new ErrorResult(Messages.ProductNameInvalid);//Görüldüğü üzere değişmezlerimizi tuttuğumuz class içerisinde 
+            //    //Magic strings karmaşıklığına sebebiyet vermeden static metodlarımız yardımı ile işimizi çözümlemiş olduk.
+            //}
        
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);//Burada mesaj döndürebilir yada boolean değer döndürmesi yapabilmektedir.
