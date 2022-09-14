@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Astract
+namespace Entities.Abstract
 {   //IEntity implement eden class bir veritabanı tablosudur.
     public interface IEntity
     {

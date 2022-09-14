@@ -3,7 +3,7 @@ using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
 using System;
 
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace ConsoleUI11 // Note: actual namespace depends on the project name.
 {
     public class Program
     {
@@ -26,7 +26,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             {
                 Console.WriteLine(result.Message);
             }
-            
+
         }
 
         //private static void CustomerTest()
@@ -38,13 +38,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
         //    }
         //}
 
-        private static void CategoryTest()
-        {
-            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryManager.GetAll())
-            {
-                Console.WriteLine(category.CategoryName);
-            }
-        }
+        //private static void CategoryTest()
+        //{
+        //    CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+        //    foreach (var category in categoryManager.GetAll())
+        //    {
+        //        Console.WriteLine(category.CategoryName);
+        //    }
+        //}
     }
 }

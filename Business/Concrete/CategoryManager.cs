@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -21,16 +23,19 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-        public List<Category> GetAll()
+        public IDataResult<List<Category>> GetAll()
         {
-            return _categoryDal.GetAll();
+            return new DataResultt<List<Category>>(_categoryDal.GetAll(),true,Messages.ListId);
             //Filtre vermiyoruz çünkü tüm kategorileri listelemek istiyorum.
         }
 
-        public List<Category> GetById(int categoryId)
+        public IDataResult<List<Category>> GetById(int categoryId)
         {
             //Filtreleme işlemi gerçekleştiriyoruz.CategoryId'ye göre.
-            return _categoryDal.GetAll(a => a.CategoryId == categoryId);
+
+            
+
+            return new DataResultt<List<Category>>(_categoryDal.GetAll(a => a.CategoryId == categoryId),true,Messages.NotSuccess);
         
         }
     }

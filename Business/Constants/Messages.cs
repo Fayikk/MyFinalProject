@@ -15,6 +15,7 @@ namespace Business.Constants
         public static string MaintanceTime = "Sistem Bakımda";
         public static string Success = "Listelendi";
         public static string ListId = "Listed";
+        public static string NotSuccess = "Başarısız";
         //Temel mesajlarımızı buraya koyuyoruz.
     }
 }

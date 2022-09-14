@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Business.Abstract
     public interface ICategoryService
     {
        
-        List<Category> GetAll();//Tümünü listeler
-        List<Category> GetById(int categoryId);//Filtreli şekilde CategoryId'lerde listeleme işlemi gerçekleştirilir.
+       IDataResult< List<Category>> GetAll();//Tümünü listeler
+        IDataResult<List<Category>> GetById(int categoryId);//Filtreli şekilde CategoryId'lerde listeleme işlemi gerçekleştirilir.
         
         
     
