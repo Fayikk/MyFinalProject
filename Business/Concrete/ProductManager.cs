@@ -1,12 +1,17 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.NewFolder.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +30,15 @@ namespace Business.Concrete
         //Bu ifadeye AOP denir.
         //[Validate]//Bunu doğrula anlamına gelmektedir.
 
+
+        //Bu bölge attribute için ayrılmıştır
+
+        [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.
         public IResult Add(Product product)
         {
-
-            if (product.ProductName.Length < 2)
-            {
-                //magic strings
-                return new ErrorResult(Messages.ProductNameInvalid);//görüldüğü üzere değişmezlerimizi tuttuğumuz class içerisinde 
-                //magic strings karmaşıklığına sebebiyet vermeden static metodlarımız yardımı ile işimizi çözümlemiş olduk.
-            }
+            //business codes =iş gereksinimlerine uygunluk.Ejliyet alacaksınız ve o kişiye ehliyet verecekmisiniz.Örneğin direksiyon sınavına giriş için,yazılı sınavda geçtinizmi.
+            //validation codes birbirine karıştırılmamalı
+            
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);//Burada mesaj döndürebilir yada boolean değer döndürmesi yapabilmektedir.
@@ -50,13 +55,13 @@ namespace Business.Concrete
             //Varsa iş kodlarımızı buraya yazıyoruz.
             //Bir iş sınıfı başka sınıfları new'lemez
             //Yetkisi varmı?
-            if (DateTime.Now.Hour==21)
+            if (DateTime.Now.Hour == 1)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintanceTime);//Data döndürmüyorum
             }
 
 
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.Success);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.Success);
 
         }
 
@@ -70,13 +75,13 @@ namespace Business.Concrete
 
         public IDataResult<Product> GetBtId(int productId)
         {
-            return new DataResultt<Product>(_productDal.Get(p => p.ProductId == productId),true,Messages.Success);//Delegasyon yöntemi
+            return new DataResultt<Product>(_productDal.Get(p => p.ProductId == productId), true, Messages.Success);//Delegasyon yöntemi
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
         {
             //Burada 2 fiyat aralığında olan data'yı bize getirme işlemini  gerçekleştirecektir.
-            return new DataResultt<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max),false,"Error");
+            return new DataResultt<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max), false, "Error");
         }
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
@@ -85,7 +90,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintanceTime);//Data döndürmüyorum
             }
-            return new DataResultt<List<ProductDetailDto>>(_productDal.GetProductDetails(),true,"Success");
+            return new DataResultt<List<ProductDetailDto>>(_productDal.GetProductDetails(), true, "Success");
         }
     }
 }

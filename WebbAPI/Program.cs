@@ -1,10 +1,18 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Umbraco.Core.Composing.CompositionExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());//Dependency injection için gerekli adým.Autofac kullanýmý için hazýrlýk.
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterModule(new AutoFacBusinessModule());//Baðýmlýlýktan kurtulmak için IoC yapýlan dosyanýn yolunu veriyoruz.
+});
 
 // Add services to the container.
 
@@ -13,21 +21,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Aþaðýdaki yapýlarýn genel olarak adý-->Autofac,Ninject
-//AOP
-builder.Services.AddControllers();
-//services.AddControllers();
-builder.Services.AddSingleton<IProductService, ProductManager>();//Bana arka planda bir referans oluþtur.
-builder.Services.AddSingleton<IProductDal, EfProductDal>();//Burada ise anlatýlmak istenen,eðer biri senden IProductDal isterse ona EfProductDal ver anlamýan gelmektedir.
-                                                   //Yukarýdaki AddSingleton metodu ile yapýlmasý gereken ifadeyi daha anlaþýlýr ve kolay bir þekilde inceleyebiliriz.
-                                                   //Bu ifade þu anlama gelmektedir.IProductService ile gönderilen ProductMananger'ý arka planda new'le anlamýna gelmektedir.
-                                                   //Bu yapý sayesinde baðýmlýlýk'tan kurtarýyoruz
-
-
-//Category iþlemi içinde builder yazalým
-builder.Services.AddControllers();
-builder.Services.AddSingleton<ICategoryService,CategoryManager>();
-builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
 
 
 

@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,14 +20,17 @@ namespace Business.Concrete
             _ICustomerDal = ıCustomerDal;
         }
 
-        public List<Customer> GetById(string customerId)
+        public IDataResult<List<Customer>> GetById(string customerId)
         {
-            return _ICustomerDal.GetAll(i => i.CustomerId == customerId);
+            return new DataResultt<List<Customer>>(_ICustomerDal.GetAll(i => i.CustomerId == customerId), true, Messages.Success);
+
+
+
         }
 
-        public List<Customer> GetAll()
+        public IDataResult<List<Customer>> GetAll()
         {
-            return _ICustomerDal.GetAll();  
+            return new DataResultt<List<Customer>>(_ICustomerDal.GetAll(),true,Messages.Success);  
         }
     }
 }

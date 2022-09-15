@@ -16,6 +16,7 @@ namespace Business.Constants
         public static string Success = "Listelendi";
         public static string ListId = "Listed";
         public static string NotSuccess = "Başarısız";
+        public static string UnitPriceInvalid = "Geçersiz";
         //Temel mesajlarımızı buraya koyuyoruz.
     }
 }
