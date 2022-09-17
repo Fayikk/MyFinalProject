@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -25,6 +26,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Category>> GetAll()
         {
+            
             return new DataResultt<List<Category>>(_categoryDal.GetAll(),true,Messages.ListId);
             //Filtre vermiyoruz çünkü tüm kategorileri listelemek istiyorum.
         }
@@ -38,5 +40,7 @@ namespace Business.Concrete
             return new DataResultt<List<Category>>(_categoryDal.GetAll(a => a.CategoryId == categoryId),true,Messages.NotSuccess);
         
         }
+
+       
     }
 }

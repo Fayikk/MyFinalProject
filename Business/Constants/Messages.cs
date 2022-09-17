@@ -17,6 +17,9 @@ namespace Business.Constants
         public static string ListId = "Listed";
         public static string NotSuccess = "Başarısız";
         public static string UnitPriceInvalid = "Geçersiz";
+        public static string ProductCountOfCategory = "Kategoride fazla ürün bulunmaktadır";
+        internal static string ProductNameAlreadyExist="Aynı ürün isminde başka ürün bulunmaktadır";
+        internal static string OverloadingCategory="Kategori aşırı yüklendi";
         //Temel mesajlarımızı buraya koyuyoruz.
     }
 }
