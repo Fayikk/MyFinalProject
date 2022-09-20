@@ -37,14 +37,13 @@ namespace Business.Concrete
 
 
         //Bu bölge attribute için ayrılmıştır
-
+        //[SecuredOperation("admin,operatör")]  Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
         [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.
         public IResult Add(Product product)
         {
             //Aynı isimde ürün eklenemez
             IResult result = BusinesRules.Run(ChechkIfProductCountCategoryCorrect(product.CategoryId),
-                 CheckIfNameExists(product.ProductName),
-                 CheckIfCategoryLimitExceded());
+                 CheckIfNameExists(product.ProductName));
             if (result != null)
             {
                 return result;

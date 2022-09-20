@@ -27,6 +27,16 @@ namespace WebbAPI.Controllers
 
         }
 
+        [HttpPost("GetAll")]
+        public IActionResult GetAll()
+        {
+            var result = categoryService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
 
     }
 }
