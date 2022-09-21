@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,5 +32,9 @@ namespace DataAccess.Concrete.EntityFramework
 
         //Artık bu sayede veritabanı işlemleriyle alakalı kodlarımızı Product,Customer,Category için yazabiliriz.
         public DbSet<Order> Orders { get; set; }//Benim 1 tane order nesnem var ve bunu orders ile ilişkilendirirmisin.
+
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

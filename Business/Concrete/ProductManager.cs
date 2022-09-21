@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -39,6 +40,7 @@ namespace Business.Concrete
         //Bu bölge attribute için ayrılmıştır
         //[SecuredOperation("admin,operatör")]  Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
         [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.
+        [SecuredOperation("product.add")]
         public IResult Add(Product product)
         {
             //Aynı isimde ürün eklenemez

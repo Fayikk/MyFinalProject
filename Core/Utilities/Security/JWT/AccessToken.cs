@@ -8,8 +8,8 @@ namespace Core.Utilities.Security.JWT
 {
     public class AccessToken
     {
-        public string Token { get; set; }
-        public DateTime Expiration { get; set; }
+        public string Token { get; set; } //Jetonun bu 
+        public DateTime Expiration { get; set; } //Jetonun bu tarihte bitecek anlmaına gelmektedir.
 
     }
 }
