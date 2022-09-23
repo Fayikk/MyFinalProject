@@ -1,10 +1,12 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebbAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -30,7 +32,7 @@ namespace WebbAPI.Controllers
 
             return BadRequest(result.Message);//Burada ise eğer cevap olumsuz ise bu değer döndürülecektir.
         }
-
+        
         [HttpPost("add")]//Burada ise Post işlemi yapmamız gerekmektedir.
                   //Değerlerin değişimi vb.
                     //Güncelleme ve silme işlemleri içinde Post kullanılabilir.
