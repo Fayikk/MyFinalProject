@@ -3,6 +3,9 @@ using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.NewFolder.Validation;
 using Core.Utilities.Business;
@@ -16,9 +19,11 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Business.Concrete
 {   //Trying
@@ -40,7 +45,8 @@ namespace Business.Concrete
         //Bu bölge attribute için ayrılmıştır
         //[SecuredOperation("admin,operatör")]  Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
         [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.
-        [SecuredOperation("deneme")]
+        //[SecuredOperation("deneme,product.add")]
+        [CacheRemoveAspect("IProductService.Get")]//IProductService'teki bütün Get'leri  sil anlamına gelmektedir.Herhangi bir değişiklik durumunda uygula anlamına gelmektedir
 
         public IResult Add(Product product)
         {
@@ -68,6 +74,7 @@ namespace Business.Concrete
             //ve yukarıdaki ifadeyi kullanabilmemizin yolu'da sııf için constructor'lardan geçmektedir.
         }
 
+        [CacheAspect] //Key,value pair ile tutulmaktadır
         public IDataResult<List<Product>> GetAll()
         {
             //Varsa iş kodlarımızı buraya yazıyoruz.
@@ -91,6 +98,8 @@ namespace Business.Concrete
             //bunu döndürelim.
         }
 
+        [CacheAspect] //Key,value pair ile tutulmaktadır
+        [PerformanceAspect(1)]//Burada denilen bu metodun çalışması 5sn'yi geçerse eğer uyar!
         public IDataResult<Product> GetBtId(int productId)
         {
             return new DataResultt<Product>(_productDal.Get(p => p.ProductId == productId), true, Messages.Success);//Delegasyon yöntemi
@@ -156,6 +165,17 @@ namespace Business.Concrete
             }
             return new SuccessResult(Messages.Success);
         }
-
+        [TransactionScopeAspect] //Senkronizasyon işlemlerini gerçekleştiri.
+        public IResult AddTransactionalTest(Product product)
+        {
+           
+            Add(product);
+            if (product.UnitPrice<10)
+            {
+                throw new Exception("");
+            }
+            Add(product);
+            return null;
+        }
     }
 }

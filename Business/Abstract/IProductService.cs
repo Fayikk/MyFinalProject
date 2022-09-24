@@ -27,6 +27,8 @@ namespace Business.Abstract
 
         IResult Update(Product product);
 
+        IResult AddTransactionalTest(Product product); //Uygulamalarda tutarlılığı korumak için kullanılan bir yöntemdir.
+
         //RESTFUL --->HTTP-->TCP
 
     }
