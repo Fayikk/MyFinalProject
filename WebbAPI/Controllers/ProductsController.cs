@@ -26,11 +26,11 @@ namespace WebbAPI.Controllers
             var result = _productService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Data);//Döndürülen değer eğer success ise Ok("Bu bizim status code'umuzdur") bu ifadeyi döndür anlamına gelmektedir.
+                return Ok(result);//Döndürülen değer eğer success ise Ok("Bu bizim status code'umuzdur") bu ifadeyi döndür anlamına gelmektedir.
             }
 
 
-            return BadRequest(result.Message);//Burada ise eğer cevap olumsuz ise bu değer döndürülecektir.
+            return BadRequest(result);//Burada ise eğer cevap olumsuz ise bu değer döndürülecektir.
         }
         
         [HttpPost("add")]//Burada ise Post işlemi yapmamız gerekmektedir.

@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -80,13 +81,14 @@ namespace Business.Concrete
             //Varsa iş kodlarımızı buraya yazıyoruz.
             //Bir iş sınıfı başka sınıfları new'lemez
             //Yetkisi varmı?
-            if (DateTime.Now.Hour == 1)
-            {
-                return new ErrorDataResult<List<Product>>(Messages.MaintanceTime);//Data döndürmüyorum
-            }
+            //if (DateTime.Now.Hour == 1)
+            //{
+            //    return new ErrorDataResult<List<Product>>(Messages.MaintanceTime);//Data döndürmüyorum
+            //}
+            Thread.Sleep(3000);
 
 
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.Success);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.Success);
 
         }
 
