@@ -27,7 +27,7 @@ namespace Business.Concrete
         public IDataResult<List<Category>> GetAll()
         {
             
-            return new DataResultt<List<Category>>(_categoryDal.GetAll(),true,Messages.ListId);
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(),Messages.Success);
             //Filtre vermiyoruz çünkü tüm kategorileri listelemek istiyorum.
         }
 
@@ -37,7 +37,7 @@ namespace Business.Concrete
 
             
 
-            return new DataResultt<List<Category>>(_categoryDal.GetAll(a => a.CategoryId == categoryId),true,Messages.NotSuccess);
+            return new DataResultt<List<Category>>(_categoryDal.GetAll(a => a.CategoryId == categoryId),true,Messages.Success);
         
         }
 
