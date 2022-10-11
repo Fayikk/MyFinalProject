@@ -47,17 +47,17 @@ namespace Business.Concrete
         //[SecuredOperation("admin,operatör")]  Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
         [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.s
         //[SecuredOperation("deneme,product.add")]
-        [CacheRemoveAspect("IProductService.Get")]//IProductService'teki bütün Get'leri  sil anlamına gelmektedir.Herhangi bir değişiklik durumunda uygula anlamına gelmektedir
+        //[CacheRemoveAspect("IProductService.Get")]//IProductService'teki bütün Get'leri  sil anlamına gelmektedir.Herhangi bir değişiklik durumunda uygula anlamına gelmektedir
 
         public IResult Add(Product product)
         {
             //Aynı isimde ürün eklenemez
-            IResult result = BusinesRules.Run(ChechkIfProductCountCategoryCorrect(product.CategoryId),
-                 CheckIfNameExists(product.ProductName));
-            if (result != null)
-            {
-                return result;
-            }
+            //IResult result = BusinesRules.Run(ChechkIfProductCountCategoryCorrect(product.CategoryId),
+            //     CheckIfNameExists(product.ProductName));
+            //if (result != null)
+            //{
+            //    return result;
+            //}
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
 
@@ -85,7 +85,7 @@ namespace Business.Concrete
             //{
             //    return new ErrorDataResult<List<Product>>(Messages.MaintanceTime);//Data döndürmüyorum
             //}
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
 
 
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.Success);

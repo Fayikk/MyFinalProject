@@ -19,7 +19,7 @@ namespace Business.ValidationRules.FluentValidation
             //RuleFor(p => p.UnitPrice).GreaterThan(0);//p'nin unitprice'ı 0'dan büyük olmalıdır.
             //RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1);
             ////Yukarıdaki ifadenin anlamı ise;Unit price 10'dan büyük eşit olmalıdır.Ancak categoryıd'si "1" ise bu kural geçerli olacaktır.
-            //RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürün adı 'A' ile başlamalıdır");//Kendi yazdığımız kurala uymalıdır.
+            RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürün adı 'A' ile başlamalıdır");//Kendi yazdığımız kurala uymalıdır.
 
         }
 

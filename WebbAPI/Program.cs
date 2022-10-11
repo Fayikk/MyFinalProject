@@ -93,6 +93,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//Aþaðýdaki yapýlar middleware'lerdir.
+
+app.ConfigureCustomExceptionMiddleware();//extensionlar için implemente edildi.
+
 app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());//belirtilen port üzerinden eðer istek gelirse buna izin ver anlmaýna gelmektedir
 
 app.UseHttpsRedirection();
