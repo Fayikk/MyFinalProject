@@ -1,6 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using System.Reflection;
-using IInterceptor = Castle.DynamicProxy.IInterceptor;
+
 
 namespace Core.Utilities.Interceptors
 {

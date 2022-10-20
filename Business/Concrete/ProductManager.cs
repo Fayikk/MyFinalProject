@@ -44,10 +44,10 @@ namespace Business.Concrete
 
 
         //Bu bölge attribute için ayrılmıştır
-        [SecuredOperation("admin,operatör")]  //Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
-        [ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.s
+        //[ValidationAspect(typeof(ProductValidator))]//Add metodunu doğrula ProductValidator'ı kullnarak anlamına gelmektedir.s
         //[SecuredOperation("deneme,product.add")]
         //[CacheRemoveAspect("IProductService.Get")]//IProductService'teki bütün Get'leri  sil anlamına gelmektedir.Herhangi bir değişiklik durumunda uygula anlamına gelmektedir
+        [SecuredOperation("admin")]  //Korunan opereasyon anlamına gelmektedir. Bu operatör admin yada editör yetkisine sahiptir diyebiliriz.
 
         public IResult Add(Product product)
         {

@@ -70,10 +70,10 @@ builder.Services.AddCors();
 
 
 
-builder.Services.AddDependencyResolvers(new ICoreModule[]
-{
-    new CoreModule()
-});
+builder.Services.AddDependencyResolver(new ICoreModule[]
+                 {
+                     new CoreModule()
+                 }); ;
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
